@@ -25,31 +25,28 @@ object TargetManager {
 
     fun prefetchContent() {
         val latch = CountDownLatch(1)
-        val mboxParameters: HashMap<String?, String?> = object : HashMap<String?, String?>() {
-            init {
-                put("name", "Home_Zone0")
-            }
-        }
-        val profileParameters: HashMap<String?, String?> = object : HashMap<String?, String?>() {
-            init {
 
-                put("User_Profile_DeliveryPlant", "P003")
-                put("User_Profile_AccountNumber", "2052008938")
-                put("User_Profile_CustomerMarketingCodes", "92,408,865,861")
-                put("User_Profile_Affiliation", "7007004219")
-                put("User_Profile_PDP", " ")
-                put("User_Profile_State", "NY")
-                put("User_Profile_Zip", "10954-2050")
-                put("User_Profile_Customer_Classification", "11")
-                put("User_Profile_Customer_Group", "1I")
-                put("User_Profile_Customer_Group1", "")
-                put("User_Profile_Industry_Key", "MA")
-                put("User_Profile_Customer_Primary_Business_Unit", "06")
-                put("User_Disable_Search", "N")
-                put("User_Page_Type", "home")
+        val mboxParameters: HashMap<String?, String?> = hashMapOf(
+            "name" to "Home_Zone0"
+        )
 
-            }
-        }
+        val profileParameters: HashMap<String?, String?> = hashMapOf(
+            "User_Profile_DeliveryPlant" to "P003",
+            "User_Profile_AccountNumber" to "2052008938",
+            "User_Profile_CustomerMarketingCodes" to "92,408,865,861",
+            "User_Profile_Affiliation" to "7007004219",
+            "User_Profile_PDP" to " ",
+            "User_Profile_State" to "NY",
+            "User_Profile_Zip" to "10954-2050",
+            "User_Profile_Customer_Classification" to "11",
+            "User_Profile_Customer_Group" to "1I",
+            "User_Profile_Customer_Group1" to "",
+            "User_Profile_Industry_Key" to "MA",
+            "User_Profile_Customer_Primary_Business_Unit" to "06",
+            "User_Disable_Search" to "N",
+            "User_Page_Type" to "home"
+        )
+
         val targetParameters = TargetParameters
             .Builder()
             .parameters(mboxParameters)
@@ -60,17 +57,15 @@ object TargetManager {
 
         val prefetchList = listOf(prefetchObject)
 
-        Target.prefetchContent(prefetchList, targetParameters, object : AdobeCallback<String> {
-            override fun call(success: String?) {
-                if (success != null) {
-                    retrievePrefetchedContent()
-                } else {
-                    _contentState.value = ContentState.Error("Prefetch failed")
-                }
-                latch.countDown()
+        Target.prefetchContent(prefetchList, targetParameters) { success ->
+            if (success != null) {
+                retrievePrefetchedContent()
+            } else {
+                _contentState.value = ContentState.Error("Prefetch failed")
             }
-        })
-        latch.await(10, TimeUnit.SECONDS)
+            latch.countDown()
+        }
+        latch.await(5, TimeUnit.SECONDS)
     }
 
     private fun retrievePrefetchedContent() {
