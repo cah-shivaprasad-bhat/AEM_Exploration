@@ -20,7 +20,7 @@ class AdobeManager @Inject constructor(
     fun init() {
         MobileCore.setApplication(context.applicationContext as Application)
         MobileCore.setLogLevel(LoggingMode.VERBOSE)
-        MobileCore.configureWithAppID("c6329b3d-6d30-d71e-42a7-e31dc8a71900")
+        MobileCore.configureWithAppID("42925fc841db/9da9ec012a62/launch-0f1f5a8ce051-development")
         try {
             val extensions = listOf(
                 Analytics.EXTENSION,
@@ -30,13 +30,14 @@ class AdobeManager @Inject constructor(
             MobileCore.registerExtensions(
                 extensions
             ) {
-                System.out.print("Successfully registered Adobe extensions")
+                System.out.println("Successfully registered Adobe extensions")
             }
 
             Identity.getExperienceCloudId {
                 mid = it
             }
             MobileCore.lifecycleStart(null)
+            TargetManager.prefetchContent()
         } catch (e: Exception) {
             Log.d("ADOBE_MANAGER", "Exception = ${e.message}")
 
