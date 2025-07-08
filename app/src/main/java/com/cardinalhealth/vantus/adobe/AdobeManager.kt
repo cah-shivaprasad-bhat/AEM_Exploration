@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.adobe.marketing.mobile.Analytics
+import com.adobe.marketing.mobile.Assurance
 import com.adobe.marketing.mobile.Identity
 import com.adobe.marketing.mobile.LoggingMode
 import com.adobe.marketing.mobile.MobileCore
@@ -27,6 +28,7 @@ class AdobeManager @Inject constructor(
                 mid = it
             }
             MobileCore.lifecycleStart(null)
+            Assurance.startSession()
             TargetManager.prefetchContent()
         } catch (e: Exception) {
             Log.d("ADOBE_MANAGER", "Exception = ${e.message}")

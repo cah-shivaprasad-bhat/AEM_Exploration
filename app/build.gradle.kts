@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.hilt.ext.work)
     implementation(libs.adobe.bom)
+    implementation(libs.adobe.assurance)
     ksp(libs.hilt.compiler)
     ksp(libs.hilt.ext.compiler)
     testImplementation(libs.junit)

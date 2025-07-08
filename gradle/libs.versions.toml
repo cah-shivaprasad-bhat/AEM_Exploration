@@ -12,6 +12,7 @@ adobeSDKCore = "3.4.1"
 adobeAnalytics = "3.0.2"
 adobeIdentity = "3.0.2"
 adobeTarget = "3.0.2"
+adobeAssurance = "3.0.7"
 adobeBOM = "3.13.0"
 hilt = "2.56.2"
 hiltExt = "1.2.0"
@@ -42,6 +43,7 @@ adobe-analytics = { group = "com.adobe.marketing.mobile", name = "analytics", ve
 adobe-identity = { group = "com.adobe.marketing.mobile", name = "identity", version.ref = "adobeIdentity" }
 adobe-target = { group = "com.adobe.marketing.mobile", name = "target", version.ref = "adobeTarget" }
 adobe-bom = { group = "com.adobe.marketing.mobile", name = "sdk-bom", version.ref = "adobeBOM" }
+adobe-assurance = { group = "com.adobe.marketing.mobile", name = "assurance", version.ref = "adobeAssurance" }
 
 # Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }

@@ -3,6 +3,7 @@ package com.cardinalhealth.vantus
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.adobe.marketing.mobile.Analytics
+import com.adobe.marketing.mobile.MobileCore
 import com.cardinalhealth.vantus.adobe.TargetManager
 import com.cardinalhealth.vantus.ui.theme.AEM_ExplorationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,10 +40,16 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         TargetManager.prefetchContent()
+        logAnalytics()
         return super.onCreateView(name, context, attrs)
     }
-}
 
+    fun logAnalytics() {
+        Log.d("MAIN_ACTIVITY", "Logging Analytics Event")
+        val map = hashMapOf<String, String>("name" to "cardinal", "evar1121" to "value1121")
+        MobileCore.trackState("TRACK_STATE", map)
+    }
+}
 
 
 @Composable
