@@ -15,18 +15,11 @@ import javax.inject.Inject
 class AdobeManager @Inject constructor(
     val context: Context
 ) {
-    companion object {
-        var mid = ""
-    }
-
     fun init() {
         MobileCore.setApplication(context.applicationContext as Application)
         MobileCore.setLogLevel(LoggingMode.VERBOSE)
         try {
             MobileCore.initialize(context.applicationContext as Application, "42925fc841db/9da9ec012a62/launch-0f1f5a8ce051-development") {
-                Identity.getExperienceCloudId {
-                    mid = it
-                }
                 MobileCore.lifecycleStart(null)
                 TargetManager.prefetchContent()
             }
