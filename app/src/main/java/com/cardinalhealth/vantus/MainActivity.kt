@@ -39,15 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        TargetManager.prefetchContent()
-        logAnalytics()
         return super.onCreateView(name, context, attrs)
-    }
-
-    fun logAnalytics() {
-        Log.d("MAIN_ACTIVITY", "Logging Analytics Event")
-        val map = hashMapOf<String, String>("name" to "cardinal", "evar1121" to "value1121")
-        MobileCore.trackState("TRACK_STATE", map)
     }
 }
 

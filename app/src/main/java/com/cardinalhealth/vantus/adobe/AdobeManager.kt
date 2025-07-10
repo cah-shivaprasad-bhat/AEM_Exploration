@@ -23,13 +23,14 @@ class AdobeManager @Inject constructor(
         MobileCore.setApplication(context.applicationContext as Application)
         MobileCore.setLogLevel(LoggingMode.VERBOSE)
         try {
-            MobileCore.initialize(context.applicationContext as Application, "42925fc841db/9da9ec012a62/launch-0f1f5a8ce051-development")
-            Identity.getExperienceCloudId {
-                mid = it
+            MobileCore.initialize(context.applicationContext as Application, "42925fc841db/9da9ec012a62/launch-0f1f5a8ce051-development") {
+                Identity.getExperienceCloudId {
+                    mid = it
+                }
+                MobileCore.lifecycleStart(null)
+                TargetManager.prefetchContent()
             }
-            MobileCore.lifecycleStart(null)
-            Assurance.startSession()
-            TargetManager.prefetchContent()
+
         } catch (e: Exception) {
             Log.d("ADOBE_MANAGER", "Exception = ${e.message}")
 
